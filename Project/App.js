@@ -1,12 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import HealthGoals from './Screen/HealthGoals.js';
+import { NavigationContainer} from '@react-navigation/native';
+
+
+const Tab = createBottomTabNavigator();
+
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer> 
+    <Tab.Navigator>
+      <Tab.Screen name="HealthGoals" component={HealthGoals} />
+      <Tab.Screen name="FoodDatabase" component={MealPlanning} />
+      <Tab.Screen name="MealPlannings" component={FoodDatabase} />
+    </Tab.Navigator>
+    </NavigationContainer>
   );
 }
 
