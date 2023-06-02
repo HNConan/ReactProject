@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Button } from 'react-native';
 
-const SettingsScreen = ({ navigation }) => {
+const MealPlanning = ({ navigation }) => {
   return (
     <View>
       <Text style={{ fontSize: 24 }}>SettingsScreen </Text>
@@ -10,4 +10,4 @@ const SettingsScreen = ({ navigation }) => {
   );
 };
 
-export default SettingsScreen;
+export default MealPlanning;

@@ -2,7 +2,10 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HealthGoals from './Screen/HealthGoals.js';
+import FoodDatabase from './Screen/FoodDatabase.js';
+import MealPlanning from './Screen/MealPlanning.js';
 import { NavigationContainer} from '@react-navigation/native';
+
 
 
 const Tab = createBottomTabNavigator();
