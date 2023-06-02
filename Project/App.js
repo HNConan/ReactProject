@@ -4,6 +4,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HealthGoals from './Screen/HealthGoals.js';
 import FoodDatabase from './Screen/FoodDatabase.js';
 import MealPlanning from './Screen/MealPlanning.js';
+import SearchInterface from './Screen/SearchInterface.js';
+
 import { NavigationContainer} from '@react-navigation/native';
 
 
@@ -18,6 +20,7 @@ export default function App() {
       <Tab.Screen name="HealthGoals" component={HealthGoals} />
       <Tab.Screen name="FoodDatabase" component={MealPlanning} />
       <Tab.Screen name="MealPlannings" component={FoodDatabase} />
+      <Tab.Screen name="SearchInterface" component={SearchInterface} />
     </Tab.Navigator>
     </NavigationContainer>
   );
