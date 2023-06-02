@@ -11,8 +11,8 @@ const SearchInterface = () => {
         style={styles.input}
         onChangeText={onChangeText}
         value={text}
+
       />
-   
     </SafeAreaView>
   );
 };
