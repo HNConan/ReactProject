@@ -1,6 +1,6 @@
 import React, {useState, useEffect } from 'react';
+import {Picker} from '@react-native-picker/picker';
 import {StyleSheet, View,Text,TextInput, Button, ScrollView } from 'react-native';
-import RNPickerSelect from 'react-native-picker-select';
 import { TouchableWithoutFeedback } from 'react-native';
 import { Keyboard } from 'react-native';
 
@@ -52,44 +52,28 @@ const HealthGoals = () => {
       <TextInput style={styles.input} value={weight} onChangeText={text => setWeight(text)} keyboardType="numeric"/>
 
       <Text style={styles.label}>Votre Sexe:</Text>
-      <RNPickerSelect
-        placeholder={{ label: 'Sélectionnez votre sexe', value: null }}
-        items={[
-          { label: 'Homme', value: 'Male' },
-          { label: 'Femme', value: 'Female' },
-          { label: 'Autre', value: 'other' },
-        ]}
-        style={pickerSelectStyles}
-        value={gender}
-        onValueChange={(value) => setGender(value)}
-      />
+      <Picker style={styles.picker} selectedValue={gender} onValueChange={(itemValue) => setGender(itemValue)}>
+        <Picker.Item label="Homme" value="Male" />
+        <Picker.Item label="Femme" value="Female" />
+        <Picker.Item label="Autre" value="other" />
+      </Picker>
 
       <Text style={styles.label}>Niveau d'activité:</Text>
-      <RNPickerSelect
-        placeholder={{ label: 'Sélectionnez votre niveau d\'activité', value: null }}
-        items={[
-          { label: 'Exercices légers', value: 'light_exercise' },
-          { label: 'Exercices modérés', value: 'moderate_exercise' },
-          { label: 'Exercices difficiles', value: 'heavy_exercise' },
-          { label: 'Sportif de haut niveau', value: 'extra_active' },
-        ]}
-        style={pickerSelectStyles}
-        value={activityLevel}
-        onValueChange={(value) => setActivityLevel(value)}
-      />
+      <Picker style={styles.picker} selectedValue={activityLevel} onValueChange={(itemValue) => setActivityLevel(itemValue)}>
+        <Picker.Item label="Exercices légers" value="light_exercise" />
+        <Picker.Item label="Exercices modérés" value="moderate_exercise" />
+        <Picker.Item label="Exercices difficiles" value="heavy_exercise" />
+        <Picker.Item label="Sportif de haut niveau" value="extra_active" />
+      </Picker>
 
       <Text style={styles.label}>Objectif de santé:</Text>
-      <RNPickerSelect
-        placeholder={{ label: 'Sélectionnez votre objectif de santé', value: null }}
-        items={[
-          { label: 'Perte de poids', value: 'weight_loss' },
-          { label: 'Maintien de poids', value: 'weight_maintenance' },
-          { label: 'Gain de Poids', value: 'weight_gain' },
-        ]}
-        style={pickerSelectStyles}
-        value={healthGoal}
-        onValueChange={(value) => setHealthGoal(value)}
-      />
+      <Picker style={styles.picker} selectedValue={healthGoal} onValueChange={(itemValue) => setHealthGoal(itemValue)}
+      >
+        <Picker.Item label="Perte de poids" value="weight_loss" />
+        <Picker.Item label="Maintien de poids" value="weight_maintenance" />
+        <Picker.Item label="Gain de Poids" value="weight_gain" />
+      </Picker>
+
       <Button title="Commencer" onPress={handleSubmit} disabled={!isFormValid} />
     </View>
     </TouchableWithoutFeedback>
@@ -117,28 +101,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingHorizontal: 10,
   },
-});
-const pickerSelectStyles = StyleSheet.create({
-  inputIOS: {
-    fontSize: 16,
-    paddingVertical: 12,
-    paddingHorizontal: 10,
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 4,
-    color: 'black',
-    paddingRight: 30,
-    marginBottom: 10,
-  },
-  inputAndroid: {
-    fontSize: 16,
-    paddingHorizontal: 10,
-    paddingVertical: 8,
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 8,
-    color: 'black',
-    paddingRight: 30, 
+  picker: {
     marginBottom: 10,
   },
 });
