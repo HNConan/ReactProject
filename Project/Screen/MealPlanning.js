@@ -1,6 +1,15 @@
 import React from 'react';
 import { View, Text, Button } from 'react-native';
 
+
+const DayMenu = {
+  "Breakfast": [],
+  "Lunch": [],
+  "Dinner": [],
+  "Snack": []
+};
+
+
 const MealPlanning = ({ navigation }) => {
   return (
     <View>

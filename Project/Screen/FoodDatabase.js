@@ -1,10 +1,15 @@
 import React from 'react';
 import {SafeAreaView, Button, View,Text,StyleSheet, TextInput,ScrollView, Image } from 'react-native';
 import LinkApi from '../LinkApi'
+import {Picker} from '@react-native-picker/picker';
+import { Modal } from 'react-native';
 
 const FoodDatabase = ({ navigation }) => {
   const [text, setText] = React.useState('What are you looking for ?...');
   const [searchResults, setSearchResults] = React.useState([]);
+  const [modalVisible, setModalVisible] = React.useState(false);
+  const [selectedValue, setSelectedValue] = React.useState('');
+
   const NutrimentsLabels = {
     ENERC_KCAL: "Energy (kcal)",
     CHOCDF: "Carbohydrate by difference (g)",
@@ -33,6 +38,10 @@ const onChangeText = (inputText) => {
   setText(inputText);
 };
 
+const ActionAddMeal = (item) =>
+{
+  console.log('Action button clicked for:', item);
+}
 
 const search = async (query) => {
   try {
@@ -76,7 +85,26 @@ return (
               </View>
             ))}
           </View>
+          <Button title="Add to Menu" onPress={() => setModalVisible(true)} />
+          <Modal
+             visible={modalVisible}
+          onRequestClose={() => setModalVisible(false)}
+            >
+            <View style={styles.modalContent}>
+            <Picker 
+            selectedValue={selectedValue}
+            onValueChange={(itemValue) => setSelectedValue(itemValue)}
+          >
+           <Picker.Item label="Breakfast" value="Breakfast" />
+            <Picker.Item label="Lunch" value="Lunch" />
+          <Picker.Item label="Snack" value="Snack" />
+          <Picker.Item label="Dinner" value="Dinner" />
+
+          </Picker>
+      </View>
+      </Modal>
         </View>
+        
         ))}
       </ScrollView>
   </SafeAreaView>
