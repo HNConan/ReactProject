@@ -54,7 +54,6 @@ const search = async (query) => {
         if(info.parsed.length > 0){
           if(!results.some((item) => item.foodId === info.parsed[0].food.foodId)){
             results.push(info.parsed[0].food);
-            console.log(info.parsed[0].food);
           }
         }
       })
