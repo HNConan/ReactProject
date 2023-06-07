@@ -17,10 +17,13 @@ const Tab = createBottomTabNavigator();
 
 export default function App() {
   
+  
+
   return (
-    <UserContexteProvider>
+    
 
     <NavigationContainer> 
+      <UserContexteProvider>
     <Tab.Navigator>
       <Tab.Screen name="HealthGoals" component={HealthGoals}  options={{
          tabBarIcon: ({ color, size }) => (
@@ -39,8 +42,9 @@ export default function App() {
           ),
         }} />
     </Tab.Navigator>
-    </NavigationContainer>
     </UserContexteProvider>
+    </NavigationContainer>
+
   );
 }
 

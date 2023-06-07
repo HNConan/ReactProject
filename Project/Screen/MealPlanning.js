@@ -1,12 +1,20 @@
-import React, { useContext } from 'react';
-import { View, Text } from 'react-native';
+import React, { useContext, useEffect } from 'react';
+import { View, Text, Button } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import UserContexte from '../UserContext';
 
-const MealPlanning = ({ navigation }) => {
-  const dayMenu = useContext(UserContexte);
+const MealPlanning = ({ navigation }) => { 
+  const { dayMenu } = useContext(UserContexte);
+  const refresh = () => window.location.reload(true)
+
+  useFocusEffect(() => {
+    console.log(dayMenu);
+    
+  });
 
   return (
     <View>
+      <Button title="Refresh" onClick={refresh}/>
       <Text style={styles.mealTitle}>Breakfast:</Text>
       <View style={styles.mealItemsContainer}>
         {dayMenu.Breakfast.map((food, index) => (
@@ -42,6 +50,7 @@ const MealPlanning = ({ navigation }) => {
           </Text>
         ))}
       </View>
+      
     </View>
   );
 };
@@ -60,5 +69,6 @@ const styles = {
     marginBottom: 5,
   },
 };
+
 
 export default MealPlanning;
