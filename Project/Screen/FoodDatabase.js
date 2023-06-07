@@ -1,22 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {SafeAreaView, Button, View,Text,StyleSheet, TextInput,ScrollView, Image } from 'react-native';
 import LinkApi from '../LinkApi'
-import MealPlanning from './MealPlanning'
 import {Picker} from '@react-native-picker/picker';
 import { Modal } from 'react-native';
+import UserContexte from '../UserContext';
+
+
+
 
 const FoodDatabase = ({ navigation }) => {
   const [text, setText] = React.useState('What are you looking for ?...');
   const [searchResults, setSearchResults] = React.useState([]);
   const [modalVisible, setModalVisible] = React.useState(false);
   const [selectedValue, setSelectedValue] = React.useState('Breakfast');
+  const [selectedFood, setSelectedFood] = React.useState();
 
-  const DayMenu = {
-    "Breakfast": [],
-    "Lunch": [],
-    "Dinner": [],
-    "Snack": []
-  };
+  const dayMenu = useContext(UserContexte);
+
 
   const NutrimentsLabels = {
     ENERC_KCAL: "Energy (kcal)",
@@ -49,10 +49,11 @@ const onChangeText = (inputText) => {
 const handleAddToMenu = (meal, food) => {
   if(meal === "")
     return;
-  if(!DayMenu[meal].some((item) => item.foodId === food.foodId)){
-    DayMenu[meal].push(food);
+  if(!dayMenu[meal].some((item) => item.foodId === food.foodId)){
+    dayMenu[meal].push(food);
   }
-  console.log(DayMenu);
+  console.log(dayMenu);
+  setModalVisible(false);
 };
 
 
@@ -79,6 +80,7 @@ const search = async (query) => {
 };
 
 return (
+  
   <SafeAreaView style={styles.container}>
     <TextInput style={styles.input} onChangeText={onChangeText} onFocus={handleFocus} onBlur={handleBlur} value={text}/>
     <Button title="Search" onPress={handleSearch} />
@@ -97,7 +99,7 @@ return (
               </View>
             ))}
           </View>
-          <Button title="Add to Menu" onPress={() => setModalVisible(true)} />
+          <Button title="Add to Menu" onPress={() => (setModalVisible(true), setSelectedFood(result))} />
           <Modal visible={modalVisible} onRequestClose={() => setModalVisible(false)}>
             <View style={styles.modalContent}>
             <Picker selectedValue={selectedValue} onValueChange={(itemValue) => setSelectedValue(itemValue)}>
@@ -106,11 +108,10 @@ return (
           <Picker.Item label="Snack" value="Snack" />
           <Picker.Item label="Dinner" value="Dinner" />
           </Picker>
-          <Button title="Add to Menu" onPress={() => handleAddToMenu(selectedValue, result)} />
+          <Button title="Add to Menu" onPress={() => handleAddToMenu(selectedValue, searchResults[index])} />
 
       </View>
       </Modal>
-      <MealPlanning mealPlan={DayMenu} />
 
         </View>
         
