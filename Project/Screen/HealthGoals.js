@@ -26,18 +26,18 @@ const HealthGoals = () => {
   const [result, setResult] = useState(0);
 
 
-  const [open, setOpen] = useState(false);
-  const [openSD, setOpenSD] = useState(false);
-  const [openTD, setOpenTD] = useState(false);
+  const [genderOpen, setGenderOpen] = useState(false);
+  const [ActivityLevelOpen, setActivityLevelOpen] = useState(false);
+  const [HealthGoalOpen, setHealthGoalOpen] = useState(false);
 
-  const [value, setValue] = useState(null);
-  const [valueSD, setValueSD] = useState(null);
-  const [valueTD, setValueTD] = useState(null);
+  const [genderValue, setGenderValue] = useState(null);
+  const [ActivityLevelValue, setActivityLevelValue] = useState(null);
+  const [HealthGoalValue, setHealthGoalValue] = useState(null);
 
   const [gender, setGender] = useState([
 
-    {label: 'Homme', value: 'male'},
-    {label: 'Femme', value: 'female'}
+    {label: 'Homme', value: 'Male'},
+    {label: 'Femme', value: 'Female'}
   ]);
   const  [activityLevel, setActivityLevel] = useState([
 
@@ -55,9 +55,15 @@ const HealthGoals = () => {
     {label: 'Gain de Poids', value: 'weight_gain'},
   ])
     
-  
-
-
+  const handleGenderChange = (itemValue) => {
+    setGenderValue(itemValue);
+  };
+  const handleActivityLevelChange = (itemValue) => {
+    setActivityLevelValue(itemValue);
+  };
+  const handleHealthGoalChange = (itemValue) => {
+    setHealthGoalValue(itemValue);
+  };
 
   const activityLevelValues = {
     sedentary: 1.2,
@@ -74,12 +80,11 @@ const HealthGoals = () => {
   };
 
   calculateBMR = () => { 
-      const activityLevelValue = activityLevelValues[activityLevel];
-      const weightGoalValue = weightGoals[healthGoal];
-      if(gender === "Male"){
-        return ((88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age)) * activityLevelValue) + weightGoalValue;
-      }else if(gender === "Female"){
-        return ((447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age)) * activityLevelValue) + weightGoalValue;
+   
+      if(genderValue === "Male"){
+        return ((88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age)) * activityLevelValues[ActivityLevelValue]) + weightGoals[HealthGoalValue];
+      }else if(genderValue === "Female"){
+        return ((447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age)) * activityLevelValues[ActivityLevelValue]) + weightGoals[HealthGoalValue];
       }else{
         return null;
       }
@@ -97,12 +102,12 @@ const HealthGoals = () => {
   const handleSubmit = () => {
     console.log('Form submitted!');
     console.log('Age:', age);
-    console.log('Gender:', gender);
+    console.log('Gender:', genderValue);
     console.log('Height:', height);
     console.log('Weight:', weight);
-    console.log('Activity Level:', activityLevel);
-    console.log('Health Goal:', healthGoal);
-    
+    console.log('Activity Level:', ActivityLevelValue);
+    console.log('Health Goal:', HealthGoalValue);
+
     const bmr = calculateBMR();
     console.log('BMR:', bmr);
     setResult(bmr);
@@ -139,47 +144,53 @@ const HealthGoals = () => {
 
 
 <DropDownPicker
-      open={open}
-      value={value}
-      items={gender}
-      setOpen={setOpen}
-      setValue={setValue}
-      setItems={setGender}
+  open={genderOpen}
+  value={genderValue}
+  onValueChange={handleGenderChange}
+  items={gender}
+  setOpen={setGenderOpen}
+  setValue={setGenderValue}
+  setItems={setGender}
+  placeholder="Select Gender"
+  placeholderStyle={styles.placeholderStyles}
+  containerStyle={[styles.dropdownContainer, { zIndex: 100 }]}
+
     />
-        
+         
       
     <View style={styles.spacerStyle} />
-    <View style={styles.spacerStyle} />
-    <View style={styles.spacerStyle} />
-    <View style={styles.spacerStyle} />
-    <View style={styles.spacerStyle} />
+    
 
     <DropDownPicker
-      open={openSD}
-      value={valueSD}
+      open={ActivityLevelOpen}
+      value={ActivityLevelValue}
+      onValueChange={handleActivityLevelChange}
       items={activityLevel}
-      setOpen={setOpenSD}
-      setValue={setValueSD}
+      setOpen={setActivityLevelOpen}
+      setValue={setActivityLevelValue}
       setItems={setActivityLevel}
+      containerStyle={[styles.dropdownContainer, { zIndex: 90 }]}
+
     />
 
     <View style={styles.spacerStyle} />
-    <View style={styles.spacerStyle} />
-    <View style={styles.spacerStyle} />
-    <View style={styles.spacerStyle} />
+  
 
     <DropDownPicker
-    open={openTD}
-    value={valueTD}
+    open={HealthGoalOpen}
+    value={HealthGoalValue}
+    onValueChange={handleHealthGoalChange}
     items={healthGoal}
-    setOpen={setOpenTD}
-    setValue={setValueTD}
+    setOpen={setHealthGoalOpen}
+    setValue={setHealthGoalValue}
     setItems={setHealthGoal}
+    containerStyle={[styles.dropdownContainer, { zIndex: 80 }]}
+
+
     />
 
     <View style={styles.spacerStyle} />
-    <View style={styles.spacerStyle} />
-    <View style={styles.spacerStyle} />
+  
 
 
    
