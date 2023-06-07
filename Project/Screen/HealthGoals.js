@@ -49,7 +49,6 @@ const HealthGoals = () => {
 
 
   useEffect(() => {
-    // Vérifier si tous les champs sont remplis pour activer/désactiver le bouton de soumission
     if (age && gender && height && weight && activityLevel && healthGoal) {
       setIsFormValid(true);
     } else {
