@@ -6,13 +6,16 @@ import FoodDatabase from './Screen/FoodDatabase.js';
 import MealPlanning from './Screen/MealPlanning.js';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { NavigationContainer} from '@react-navigation/native';
+import { useTheme } from 'react-native-paper';
 
 
 const Tab = createBottomTabNavigator();
 
 
 export default function App() {
+  
   return (
+    
     <NavigationContainer> 
     <Tab.Navigator>
       <Tab.Screen name="HealthGoals" component={HealthGoals}  options={{
