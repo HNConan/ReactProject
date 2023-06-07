@@ -1,9 +1,16 @@
 import React, {useState, useEffect } from 'react';
 import {Picker} from '@react-native-picker/picker';
 import Modal from 'react-native-modal';
-import {StyleSheet, View,Text,TextInput, Button, ScrollView, Alert } from 'react-native';
+import {StyleSheet, View ,InpuSafeAreaView, StatusBar, ViewtField, Keyboard, SafeAreaView,Text} from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native';
-import { Keyboard } from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import DropDownPicker from 'react-native-dropdown-picker';
+
+import {
+  Button,
+  TextInput,
+} from "react-native-paper";
+
 
 const handleDismissKeyboard = () => {
   Keyboard.dismiss();
@@ -12,14 +19,45 @@ const handleDismissKeyboard = () => {
 
 const HealthGoals = () => {
   const [age, setAge] = useState('');
-  const [gender, setGender] = useState('');
   const [height, setHeight] = useState('');
   const [weight, setWeight] = useState('');
-  const [activityLevel, setActivityLevel] = useState('');
-  const [healthGoal, setHealthGoal] = useState('');
   const [isFormValid, setIsFormValid] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [result, setResult] = useState(0);
+
+
+  const [open, setOpen] = useState(false);
+  const [openSD, setOpenSD] = useState(false);
+  const [openTD, setOpenTD] = useState(false);
+
+  const [value, setValue] = useState(null);
+  const [valueSD, setValueSD] = useState(null);
+  const [valueTD, setValueTD] = useState(null);
+
+  const [gender, setGender] = useState([
+
+    {label: 'Homme', value: 'male'},
+    {label: 'Femme', value: 'female'}
+  ]);
+  const  [activityLevel, setActivityLevel] = useState([
+
+    {label: 'Sédentaire', value: 'sedentary'},
+    {label: 'Exercices légés', value: 'light_exercise'},
+    {label: 'Exercices modérés', value: 'moderate_exercise'},
+    {label: 'Exercices difficiles', value: 'heavy_exercise'},
+    {label: 'Sportif de haut niveau', value: 'extra_active'}
+
+  ]);
+  const [healthGoal, setHealthGoal] = useState([
+
+    {label: 'Perte de poids', value: 'weight_loss'},
+    {label: 'Maintien de poids', value: 'weight_maintenance'},
+    {label: 'Gain de Poids', value: 'weight_gain'},
+  ])
+    
+  
+
+
 
   const activityLevelValues = {
     sedentary: 1.2,
@@ -72,55 +110,100 @@ const HealthGoals = () => {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollContainer}>
+
+ 
+       
+
 
     <TouchableWithoutFeedback onPress={handleDismissKeyboard}>
     <View style={styles.container}>
-      <Text style={styles.label}>Votre Age:</Text>
-      <TextInput style={styles.input} value={age} onChangeText={text => setAge(text)} keyboardType="numeric"/>
+      
+      <TextInput
+      label="Age"
+      value={age}
+      onChangeText={text => setAge(text)}
+    />   
 
-      <Text style={styles.label}>Votre Taille (cm):</Text>
-      <TextInput style={styles.input} value={height} onChangeText={text => setHeight(text)} keyboardType="numeric" />
+<TextInput
+      label="Taille"
+      value={height}
+      onChangeText={text => setHeight(text)}
+    />   
 
-      <Text style={styles.label}>Votre Poids (kg):</Text>
-      <TextInput style={styles.input} value={weight} onChangeText={text => setWeight(text)} keyboardType="numeric"/>
 
-      <Text style={styles.label}>Votre Sexe:</Text>
-      <Picker style={styles.picker} selectedValue={gender} onValueChange={(itemValue) => setGender(itemValue)}>
-        <Picker.Item label="Homme" value="Male" />
-        <Picker.Item label="Femme" value="Female" />
-      </Picker>
+<TextInput
+      label="Poids"
+      value={weight}
+      onChangeText={text => setWeight(text)}
+    />   
 
-      <Text style={styles.label}>Niveau d'activité:</Text>
-      <Picker style={styles.picker} selectedValue={activityLevel} onValueChange={(itemValue) => setActivityLevel(itemValue)}>
-        <Picker.Item label="Sédentaire" value="sedentary" />
-        <Picker.Item label="Exercices légers" value="light_exercise" />
-        <Picker.Item label="Exercices modérés" value="moderate_exercise" />
-        <Picker.Item label="Exercices difficiles" value="heavy_exercise" />
-        <Picker.Item label="Sportif de haut niveau" value="extra_active" />
-      </Picker>
 
-      <Text style={styles.label}>Objectif de santé:</Text>
-      <Picker style={styles.picker} selectedValue={healthGoal} onValueChange={(itemValue) => setHealthGoal(itemValue)}
-      >
-        <Picker.Item label="Perte de poids" value="weight_loss" />
-        <Picker.Item label="Maintien de poids" value="weight_maintenance" />
-        <Picker.Item label="Gain de Poids" value="weight_gain" />
-      </Picker>
+<DropDownPicker
+      open={open}
+      value={value}
+      items={gender}
+      setOpen={setOpen}
+      setValue={setValue}
+      setItems={setGender}
+    />
+        
+      
+    <View style={styles.spacerStyle} />
+    <View style={styles.spacerStyle} />
+    <View style={styles.spacerStyle} />
+    <View style={styles.spacerStyle} />
+    <View style={styles.spacerStyle} />
 
-      <Button title="Commencer" onPress={handleSubmit} disabled={!isFormValid} />
+    <DropDownPicker
+      open={openSD}
+      value={valueSD}
+      items={activityLevel}
+      setOpen={setOpenSD}
+      setValue={setValueSD}
+      setItems={setActivityLevel}
+    />
+
+    <View style={styles.spacerStyle} />
+    <View style={styles.spacerStyle} />
+    <View style={styles.spacerStyle} />
+    <View style={styles.spacerStyle} />
+
+    <DropDownPicker
+    open={openTD}
+    value={valueTD}
+    items={healthGoal}
+    setOpen={setOpenTD}
+    setValue={setValueTD}
+    setItems={setHealthGoal}
+    />
+
+    <View style={styles.spacerStyle} />
+    <View style={styles.spacerStyle} />
+    <View style={styles.spacerStyle} />
+
+
+   
+
+    <Button  mode="contained" onPress={handleSubmit} disabled={!isFormValid} >
+    Commencer
+  </Button>
+
+
+
 
       <Modal isVisible={isModalVisible}>
         <View style={styles.modalContainer}>
           <Text style={styles.modalText}>Votre BMR est :</Text>
           <Text style={styles.modalText}>{result}</Text>
-          <Button title="Fermer" onPress={() => setIsModalVisible(false)} />
+          <Button  mode="contained" onPress={() => setIsModalVisible(false)} disabled={!isFormValid} >
+          Fermer
+  </Button>
         </View>
       </Modal>
     </View>
     </TouchableWithoutFeedback>
-    </ScrollView>
   );
+  
 };
 
 const styles = StyleSheet.create({
@@ -130,7 +213,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    minHeight: '100%', // ou utilisez flex: 1 si vous préférez
+    minHeight: '100%', 
+  },
+  title:
+  {
+    fontSize: 28,
+    fontWeight: '500',
+    color: '#333',
+    marginBottom: 30,
   },
   label: {
     fontSize: 16,
@@ -156,6 +246,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 10,
   },
+  spacerStyle: {
+    marginBottom: 25,
+  },
+ 
 });
 
 export default HealthGoals;

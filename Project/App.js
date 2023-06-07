@@ -8,6 +8,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { NavigationContainer} from '@react-navigation/native';
 import { UserContexteProvider } from './UserContext';
 
+import { useTheme } from 'react-native-paper';
 
 
 const Tab = createBottomTabNavigator();
@@ -15,31 +16,30 @@ const Tab = createBottomTabNavigator();
 
 
 export default function App() {
-
-
+  
   return (
     <UserContexteProvider>
-      <NavigationContainer> 
-      <Tab.Navigator>
-        <Tab.Screen name="HealthGoals" component={HealthGoals}  options={{
-          tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="home" color={color} size={size} />
-            ),
-          }}
-        />
-        <Tab.Screen name="MealPlanning" component={MealPlanning} options={{
-          tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="food-fork-drink" color={color} size={size} />
-            ),
-          }} />
-        <Tab.Screen name="FoodDatabase" component={FoodDatabase} options={{
-          tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="food-apple" color={color} size={size} />
-            ),
-          }} />
-      </Tab.Navigator>
-      
-      </NavigationContainer>
+
+    <NavigationContainer> 
+    <Tab.Navigator>
+      <Tab.Screen name="HealthGoals" component={HealthGoals}  options={{
+         tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+        }}
+      />
+      <Tab.Screen name="MealPlanning" component={MealPlanning} options={{
+         tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="food-fork-drink" color={color} size={size} />
+          ),
+        }} />
+      <Tab.Screen name="FoodDatabase" component={FoodDatabase} options={{
+         tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="food-apple" color={color} size={size} />
+          ),
+        }} />
+    </Tab.Navigator>
+    </NavigationContainer>
     </UserContexteProvider>
   );
 }
