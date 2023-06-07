@@ -1,19 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Button } from 'react-native';
+import FoodDatabase from './FoodDatabase.js';
 
 
-const DayMenu = {
-  "Breakfast": [],
-  "Lunch": [],
-  "Dinner": [],
-  "Snack": []
-};
 
+const MealPlanning = ({ navigation, mealPlan }) => {
+  
+  const DayMenu = {
+    "Breakfast": [],
+    "Lunch": [],
+    "Dinner": [],
+    "Snack": []
+  };
 
-const MealPlanning = ({ navigation }) => {
+  
   return (
     <View>
-      <Text style={{ fontSize: 24 }}>SettingsScreen </Text>
+      <Text>Meal Planner</Text>
       
     </View>
   );
