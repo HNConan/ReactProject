@@ -5,16 +5,14 @@ import UserContexte from '../UserContext';
 
 const MealPlanning = ({ navigation }) => { 
   const { dayMenu } = useContext(UserContexte);
-  const refresh = () => window.location.reload(true)
 
   useFocusEffect(() => {
+    console.log("MEALPLANNING DayMenu:")
     console.log(dayMenu);
-    
   });
 
   return (
     <View>
-      <Button title="Refresh" onClick={refresh}/>
       <Text style={styles.mealTitle}>Breakfast:</Text>
       <View style={styles.mealItemsContainer}>
         {dayMenu.Breakfast.map((food, index) => (

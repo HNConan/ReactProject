@@ -16,7 +16,6 @@ const FoodDatabase = ({ navigation }) => {
   const [selectedFood, setSelectedFood] = React.useState();
 
   const { dayMenu, setDayMenu } = useContext(UserContexte);
-  const dayMenuLocal = dayMenu;
 
   const NutrimentsLabels = {
     ENERC_KCAL: "Energy (kcal)",
@@ -49,10 +48,17 @@ const onChangeText = (inputText) => {
 const handleAddToMenu = (meal, food) => {
   if(meal === "")
     return;
-  if(!dayMenuLocal[meal].some((item) => item.foodId === food.foodId)){
-    dayMenuLocal[meal].push(food);
+  if(!dayMenu[meal].some((item) => item.foodId === food.foodId)){
+    
+    const newDayMenu = {
+      ...dayMenu,
+    };
+    console.log(newDayMenu);
+    newDayMenu[meal].push(food);
+    setDayMenu(newDayMenu);
   }
-  setDayMenu(dayMenuLocal);
+  console.log("Day Menu Updated :");
+  console.log(dayMenu);
   setModalVisible(false);
   navigation.navigate('MealPlanning');
 
