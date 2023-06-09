@@ -8,16 +8,25 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { NavigationContainer} from '@react-navigation/native';
 import { UserContexteProvider } from './UserContext';
 
-import { useTheme } from 'react-native-paper';
 
+import { DefaultTheme,DarkTheme, Provider as PaperProvider } from 'react-native-paper';
 
 const Tab = createBottomTabNavigator();
 
-
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: 'blue',
+    text: 'red',
+  },
+};
 
 export default function App() {
   
   return (
+    <PaperProvider theme={DarkTheme.colors}>
+
     <UserContexteProvider>
 
     <NavigationContainer> 
@@ -26,21 +35,31 @@ export default function App() {
          tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="home" color={color} size={size} />
           ),
+            title: 'Personnal Information',
+           
+           
+          
         }}
       />
       <Tab.Screen name="MealPlanning" component={MealPlanning} options={{
          tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="food-fork-drink" color={color} size={size} />
           ),
+          title: 'Plannig repas',
+
         }} />
       <Tab.Screen name="FoodDatabase" component={FoodDatabase} options={{
          tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="food-apple" color={color} size={size} />
           ),
+          title: 'Rechercher un aliment',
+
         }} />
     </Tab.Navigator>
     </NavigationContainer>
     </UserContexteProvider>
+    </PaperProvider>
+
   );
 }
 

@@ -114,6 +114,7 @@ const HealthGoals = () => {
     setIsModalVisible(true);
   };
 
+ 
   return (
 
  
@@ -151,7 +152,7 @@ const HealthGoals = () => {
   setOpen={setGenderOpen}
   setValue={setGenderValue}
   setItems={setGender}
-  placeholder="Select Gender"
+  placeholder="Sexe"
   placeholderStyle={styles.placeholderStyles}
   containerStyle={[styles.dropdownContainer, { zIndex: 100 }]}
 
@@ -170,6 +171,8 @@ const HealthGoals = () => {
       setValue={setActivityLevelValue}
       setItems={setActivityLevel}
       containerStyle={[styles.dropdownContainer, { zIndex: 90 }]}
+      placeholder="Niveau d'activitée"
+
 
     />
 
@@ -185,6 +188,7 @@ const HealthGoals = () => {
     setValue={setHealthGoalValue}
     setItems={setHealthGoal}
     containerStyle={[styles.dropdownContainer, { zIndex: 80 }]}
+    placeholder="Objectif"
 
 
     />
@@ -213,8 +217,9 @@ const HealthGoals = () => {
       </Modal>
     </View>
     </TouchableWithoutFeedback>
+
   );
-  
+
 };
 
 const styles = StyleSheet.create({
