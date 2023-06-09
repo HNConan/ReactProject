@@ -15,8 +15,7 @@ const FoodDatabase = ({ navigation }) => {
   const [selectedValue, setSelectedValue] = React.useState('Breakfast');
   const [selectedFood, setSelectedFood] = React.useState();
 
-  const dayMenu = useContext(UserContexte);
-
+  const { dayMenu, setDayMenu } = useContext(UserContexte);
 
   const NutrimentsLabels = {
     ENERC_KCAL: "Energy (kcal)",
@@ -50,10 +49,19 @@ const handleAddToMenu = (meal, food) => {
   if(meal === "")
     return;
   if(!dayMenu[meal].some((item) => item.foodId === food.foodId)){
-    dayMenu[meal].push(food);
+    
+    const newDayMenu = {
+      ...dayMenu,
+    };
+    console.log(newDayMenu);
+    newDayMenu[meal].push(food);
+    setDayMenu(newDayMenu);
   }
+  console.log("Day Menu Updated :");
   console.log(dayMenu);
   setModalVisible(false);
+  navigation.navigate('MealPlanning');
+
 };
 
 
@@ -108,7 +116,7 @@ return (
           <Picker.Item label="Snack" value="Snack" />
           <Picker.Item label="Dinner" value="Dinner" />
           </Picker>
-          <Button title="Add to Menu" onPress={() => handleAddToMenu(selectedValue, searchResults[index])} />
+          <Button title="Add to Menu" onPress={() => handleAddToMenu(selectedValue, selectedFood)} />
 
       </View>
       </Modal>
