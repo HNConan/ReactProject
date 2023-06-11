@@ -16,7 +16,6 @@ const Tab = createBottomTabNavigator();
 const theme = {
   ...DefaultTheme,
   colors: {
-    ...DefaultTheme.colors,
     primary: 'blue',
     text: 'red',
   },
@@ -25,7 +24,7 @@ const theme = {
 export default function App() {
   
   return (
-    <PaperProvider theme={DarkTheme.colors}>
+    <PaperProvider theme={theme.colors}>
 
     <UserContexteProvider>
 
