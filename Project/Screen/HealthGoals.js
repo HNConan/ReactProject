@@ -189,23 +189,11 @@ const HealthGoals = () => {
     setItems={setHealthGoal}
     containerStyle={[styles.dropdownContainer, { zIndex: 80 }]}
     placeholder="Objectif"
-
-
     />
-
     <View style={styles.spacerStyle} />
-  
-
-
-   
-
     <Button  mode="contained" onPress={handleSubmit} disabled={!isFormValid} >
     Commencer
   </Button>
-
-
-
-
       <Modal isVisible={isModalVisible}>
         <View style={styles.modalContainer}>
           <Text style={styles.modalText}>Votre BMR est :</Text>

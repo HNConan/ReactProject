@@ -14,18 +14,19 @@ import { DefaultTheme,DarkTheme, Provider as PaperProvider } from 'react-native-
 const Tab = createBottomTabNavigator();
 
 const theme = {
-  ...DefaultTheme,
+  ...DarkTheme,
   colors: {
-    ...DefaultTheme.colors,
-    primary: 'blue',
-    text: 'red',
-  },
+    ...DarkTheme.color,
+    primary: '#2d3436',
+    accent: '#1C1C1C',
+    background : '#636e72'
+  }
 };
 
 export default function App() {
   
   return (
-    <PaperProvider theme={DarkTheme.colors}>
+    <PaperProvider theme={theme}>
 
     <UserContexteProvider>
 
