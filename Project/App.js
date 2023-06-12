@@ -13,28 +13,20 @@ import { DefaultTheme,DarkTheme, Provider as PaperProvider } from 'react-native-
 
 const Tab = createBottomTabNavigator();
 
-const theme = {
-  ...DarkTheme,
-  colors: {
-    ...DarkTheme.color,
-    primary: '#2d3436',
-    accent: '#1C1C1C',
-    background : '#636e72'
-  }
-};
+
 
 export default function App() {
   
   return (
-    <PaperProvider theme={theme}>
+    <PaperProvider theme={DefaultTheme}>
 
     <UserContexteProvider>
 
     <NavigationContainer> 
     <Tab.Navigator>
       <Tab.Screen name="HealthGoals" component={HealthGoals}  options={{
-         tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
+         tabBarIcon: ({ size }) => (
+            <MaterialCommunityIcons name="home"  size={size} />
           ),
             title: 'Personnal Information',
            
@@ -43,15 +35,15 @@ export default function App() {
         }}
       />
       <Tab.Screen name="MealPlanning" component={MealPlanning} options={{
-         tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="food-fork-drink" color={color} size={size} />
+         tabBarIcon: ({  size }) => (
+            <MaterialCommunityIcons name="food-fork-drink"  size={size} />
           ),
           title: 'Plannig repas',
 
         }} />
       <Tab.Screen name="FoodDatabase" component={FoodDatabase} options={{
-         tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="food-apple" color={color} size={size} />
+         tabBarIcon: ({ size }) => (
+            <MaterialCommunityIcons name="food-apple" size={size} />
           ),
           title: 'Rechercher un aliment',
 
