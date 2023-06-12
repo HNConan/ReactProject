@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {SafeAreaView, Button, View,Text,StyleSheet, TextInput,ScrollView, Image } from 'react-native';
 import LinkApi from '../LinkApi'
 import {Picker} from '@react-native-picker/picker';
@@ -12,10 +12,21 @@ const FoodDatabase = ({ navigation }) => {
   const [text, setText] = React.useState('What are you looking for ?...');
   const [searchResults, setSearchResults] = React.useState([]);
   const [modalVisible, setModalVisible] = React.useState(false);
+  const [selectedDay, setSelectedDay] = React.useState('Monday');
   const [selectedValue, setSelectedValue] = React.useState('Breakfast');
-  const [selectedFood, setSelectedFood] = React.useState();
+  const [selectedFood, setSelectedFood] = React.useState('');
+  const [isFormValid, setIsFormValid] = React.useState(false);
 
   const { dayMenu, setDayMenu } = useContext(UserContexte);
+
+
+  useEffect(() => {
+    if (selectedDay && selectedValue && selectedFood) {
+      setIsFormValid(true);
+    } else {
+      setIsFormValid(false);
+    }
+  }, [selectedDay , selectedValue , selectedFood]);
 
   const NutrimentsLabels = {
     ENERC_KCAL: "Energy (kcal)",
@@ -45,20 +56,18 @@ const onChangeText = (inputText) => {
   setText(inputText);
 };
 
-const handleAddToMenu = (meal, food) => {
+const handleAddToMenu = (day, meal, food) => {
   if(meal === "")
     return;
-  if(!dayMenu[meal].some((item) => item.foodId === food.foodId)){
+  if(!dayMenu[day][meal].some((item) => item.foodId === food.foodId)){
     
     const newDayMenu = {
       ...dayMenu,
     };
     console.log(newDayMenu);
-    newDayMenu[meal].push(food);
+    newDayMenu[day][meal].push(food);
     setDayMenu(newDayMenu);
   }
-  console.log("Day Menu Updated :");
-  console.log(dayMenu);
   setModalVisible(false);
   navigation.navigate('MealPlanning');
 
@@ -107,16 +116,26 @@ return (
               </View>
             ))}
           </View>
-          <Button title="Add to Menu" onPress={() => (setModalVisible(true), setSelectedFood(result))} />
+          <Button title="Add to Menu"  onPress={() => (setModalVisible(true), setSelectedFood(result))} />
           <Modal visible={modalVisible} onRequestClose={() => setModalVisible(false)}>
-            <View style={styles.modalContent}>
-            <Picker selectedValue={selectedValue} onValueChange={(itemValue) => setSelectedValue(itemValue)}>
-          <Picker.Item label="Breakfast" value="Breakfast"/>
-          <Picker.Item label="Lunch" value="Lunch" />
-          <Picker.Item label="Snack" value="Snack" />
-          <Picker.Item label="Dinner" value="Dinner" />
+          <View style={styles.modalContent}>
+          <Picker selectedValue={selectedDay} onValueChange={(itemValue) => setSelectedDay(itemValue)}>
+            <Picker.Item label="Monday" value="Monday"/>
+            <Picker.Item label="Tuesday" value="Tuesday"/>
+            <Picker.Item label="Wednesday" value="Wednesday"/>
+            <Picker.Item label="Thursday" value="Thursday"/>
+            <Picker.Item label="Friday" value="Friday"/>
+            <Picker.Item label="Saturday" value="Saturday"/>
+            <Picker.Item label="Sunday" value="Sunday"/>
+
           </Picker>
-          <Button title="Add to Menu" onPress={() => handleAddToMenu(selectedValue, selectedFood)} />
+          <Picker selectedValue={selectedValue} onValueChange={(itemValue) => setSelectedValue(itemValue)}>
+            <Picker.Item label="Breakfast" value="Breakfast"/>
+            <Picker.Item label="Lunch" value="Lunch" />
+            <Picker.Item label="Snack" value="Snack" />
+            <Picker.Item label="Dinner" value="Dinner" />
+          </Picker>
+          <Button title="Add to Menu" disabled={!isFormValid} onPress={() => handleAddToMenu(selectedDay, selectedValue, selectedFood)} />
 
       </View>
       </Modal>
