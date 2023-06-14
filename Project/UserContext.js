@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const UserContexte = React.createContext();
 
@@ -41,9 +42,39 @@ export const UserContexteProvider = ({ children }) => {
                     },
       });
 
+      const saveDayMenuToStorage = async (updatedDayMenu) => {
+        try {
+          const jsonDayMenu = JSON.stringify(updatedDayMenu);
+          await AsyncStorage.setItem('dayMenu', jsonDayMenu);
+        } catch (error) {
+          console.log('Erreur lors de la sauvegarde:', error);
+        }
+      };
+    
+      const loadDayMenuFromStorage = async () => {
+        try {
+          const jsonDayMenu = await AsyncStorage.getItem('dayMenu');
+          if (jsonDayMenu) {
+            const parsedDayMenu = JSON.parse(jsonDayMenu);
+            setDayMenu(parsedDayMenu);
+          }
+        } catch (error) {
+          console.log('Erreur lors du chargement:', error);
+        }
+      };
+    
+      useEffect(() => {
+        loadDayMenuFromStorage(); 
+      }, []);
+    
+      
+      const updateDayMenu = (updatedDayMenu) => {
+        setDayMenu(updatedDayMenu);
+        saveDayMenuToStorage(updatedDayMenu); 
+      };
       
   return (
-    <UserContexte.Provider value={{dayMenu, setDayMenu}}>
+    <UserContexte.Provider value={{dayMenu, setDayMenu: updateDayMenu }}>
       {children}
     </UserContexte.Provider>
   );
