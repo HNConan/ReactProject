@@ -4,11 +4,14 @@ import LinkApi from '../LinkApi'
 import {Picker} from '@react-native-picker/picker';
 import { Modal } from 'react-native';
 import UserContexte from '../UserContext';
+import { useRoute } from '@react-navigation/native';
+
 
 
 
 
 const FoodDatabase = ({ navigation }) => {
+  const route = useRoute();
   const [text, setText] = React.useState('What are you looking for ?...');
   const [searchResults, setSearchResults] = React.useState([]);
   const [modalVisible, setModalVisible] = React.useState(false);
@@ -48,6 +51,19 @@ const handleBlur = () => {
   }
 };
 
+const handleFirstAddToMenu = (result) => {
+  setSelectedFood(result);
+  if(route.params && route.params['day'] && route.params['meal']){
+    setSelectedDay(route.params.day);
+    setSelectedValue(route.params.meal);
+    handleAddToMenu(route.params.day, route.params.meal, result);
+    delete route.params.day;
+    delete route.params.meal;
+  }else{
+    setModalVisible(true);
+  }
+};
+
 const handleSearch = () => {
   search(text);
 };
@@ -64,10 +80,12 @@ const handleAddToMenu = (day, meal, food) => {
     const newDayMenu = {
       ...dayMenu,
     };
-    console.log(newDayMenu);
+    
     newDayMenu[day][meal].push(food);
     setDayMenu(newDayMenu);
   }
+  setSelectedDay(null);
+  setSelectedValue(null);
   setModalVisible(false);
   navigation.navigate('MealPlanning');
 
@@ -116,7 +134,7 @@ return (
               </View>
             ))}
           </View>
-          <Button title="Add to Menu"  onPress={() => (setModalVisible(true), setSelectedFood(result))} />
+          <Button title="Add to Menu"  onPress={() => (handleFirstAddToMenu(result))} />
           <Modal visible={modalVisible} onRequestClose={() => setModalVisible(false)}>
           <View style={styles.modalContent}>
           <Picker selectedValue={selectedDay} onValueChange={(itemValue) => setSelectedDay(itemValue)}>

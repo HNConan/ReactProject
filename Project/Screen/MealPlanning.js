@@ -1,20 +1,32 @@
 import React, { useContext, useEffect } from 'react';
 import { View, Text, Button } from 'react-native';
-import { useFocusEffect } from '@react-navigation/native';
 import UserContexte from '../UserContext';
 import DayMeals from './DayMeals';
 
 
+
 const MealPlanning = ({ navigation }) => { 
-  const { dayMenu } = useContext(UserContexte);
-  
+  const { dayMenu, setDayMenu } = useContext(UserContexte);
+
+  const handleAddFood = (day, meal) => {
+    navigation.navigate('FoodDatabase', { day, meal });
+  };
+
+  const handleRemoveFood = (day, meal, index) => {
+    const newDayMenu = {
+      ...dayMenu,
+    };
+    newDayMenu[day][meal].splice(index, 1);
+    setDayMenu(newDayMenu);
+  };
+
 
   return (
     <View>
       {Object.keys(dayMenu).map((day, index) => (
         <View key={index}>
           <Text style={styles.dayTitle}>{day}:</Text>
-          <DayMeals dayMenu={dayMenu[day]} />
+          <DayMeals day={day} dayMenu={dayMenu[day]} onAddFood={(meal) => handleAddFood(day, meal)} onRemoveFood={(meal, index) => handleRemoveFood(day, meal, index)} />
         </View>
       ))}
     </View>

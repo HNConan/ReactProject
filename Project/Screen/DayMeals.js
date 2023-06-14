@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import ViewMeals from './ViewMeals';
 
-const DayMeals = ({ dayMenu }) => {
+const DayMeals = ({dayMenu, onRemoveFood, onAddFood }) => {
     const calculateTotalCalories = (meals) => {
         let totalCalories = 0;
         Object.values(meals).forEach((mealList) => {
@@ -17,10 +17,10 @@ const DayMeals = ({ dayMenu }) => {
     
       return (
         <View>
-          <ViewMeals meals={dayMenu.Breakfast} title="Breakfast" />
-          <ViewMeals meals={dayMenu.Lunch} title="Lunch" />
-          <ViewMeals meals={dayMenu.Dinner} title="Dinner" />
-          <ViewMeals meals={dayMenu.Snack} title="Snack" />
+          <ViewMeals meals={dayMenu.Breakfast}  onAddFood={onAddFood} onRemoveFood={onRemoveFood} title="Breakfast" />
+          <ViewMeals meals={dayMenu.Lunch}  onAddFood={onAddFood} onRemoveFood={onRemoveFood} title="Lunch" />
+          <ViewMeals meals={dayMenu.Dinner}  onAddFood={onAddFood} onRemoveFood={onRemoveFood} title="Dinner" />
+          <ViewMeals meals={dayMenu.Snack}  onAddFood={onAddFood} onRemoveFood={onRemoveFood} title="Snack" />
           
           <Text style={styles.totalCalories}>
             Total Calories (kcal): {calculateTotalCalories({'Breakfast' :[...dayMenu.Breakfast], 'Lunch' : [...dayMenu.Lunch], 'Dinner' : [...dayMenu.Dinner], 'Snack' : [...dayMenu.Snack]})}

@@ -1,16 +1,24 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
 
-const ViewMeals = ({ meals, title }) => {
+const ViewMeals = ({meals, title, onRemoveFood, onAddFood  }) => {
   return (
     <View>
       <Text style={styles.mealTitle}>{title}:</Text>
       <View style={styles.mealItemsContainer}>
         {meals.map((meal, index) => (
-          <Text key={index} style={styles.mealItem}>
-            {meal.label}
-          </Text>
+          <View key={index} style={styles.mealItemContainer}>
+          <Text style={styles.mealItem}>{meal.label}</Text>
+          <Button
+            title="Remove"
+            onPress={() => onRemoveFood(title, index)}
+          />
+          </View>
         ))}
+        <Button
+          title="Add Food"
+          onPress={() => onAddFood(title)}
+        />
       </View>
     </View>
   );

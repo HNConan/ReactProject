@@ -100,16 +100,7 @@ const HealthGoals = () => {
   }, [age, gender, height, weight, activityLevel, healthGoal]);
 
   const handleSubmit = () => {
-    console.log('Form submitted!');
-    console.log('Age:', age);
-    console.log('Gender:', genderValue);
-    console.log('Height:', height);
-    console.log('Weight:', weight);
-    console.log('Activity Level:', ActivityLevelValue);
-    console.log('Health Goal:', HealthGoalValue);
-
     const bmr = calculateBMR();
-    console.log('BMR:', bmr);
     setResult(bmr);
     setIsModalVisible(true);
   };
