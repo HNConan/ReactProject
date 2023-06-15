@@ -1,30 +1,41 @@
 import React from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
-const ViewMeals = ({meals, title, onRemoveFood, onAddFood  }) => {
+import { Button, TextInput, IconButton } from "react-native-paper";
+
+const ViewMeals = ({ meals, title, onRemoveFood, onAddFood }) => {
   return (
     <View>
       <Text style={styles.mealTitle}>{title}:</Text>
       <View style={styles.mealItemsContainer}>
         {meals.map((meal, index) => (
           <View key={index} style={styles.mealItemContainer}>
-          <Text style={styles.mealItem}>{meal.label}</Text>
-          <Button
-            title="Remove"
-            onPress={() => onRemoveFood(title, index)}
-          />
+            <Text style={styles.mealItem}>{meal.label}</Text>
+            <View style={styles.iconButtonContainer}>
+              <IconButton
+                onPress={() => onRemoveFood(title, index)}
+                icon="close"
+                
+              />
+            </View>
           </View>
         ))}
-        <Button
-          title="Add Food"
-          onPress={() => onAddFood(title)}
-        />
+        <View style={styles.ButtonContainer}>
+          <Button
+            mode="contained"
+            onPress={() => onAddFood(title)}
+            style={styles.Button}
+            labelStyle={styles.ButtonLabel}
+          >
+            Add Food
+          </Button>
+        </View>
       </View>
     </View>
   );
 };
 
-const styles = {
+const styles = StyleSheet.create({
   mealTitle: {
     fontSize: 16,
     marginTop: 10,
@@ -32,10 +43,26 @@ const styles = {
   mealItemsContainer: {
     marginLeft: 10,
   },
-  mealItem: {
-    marginLeft: 10,
+  mealItemContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     marginBottom: 5,
   },
-};
-
+  mealItem: {
+    marginLeft: 10,
+  },
+  iconButtonContainer: {
+    marginRight: 10,
+  },
+  ButtonContainer: {
+    marginLeft: 10, 
+  },
+  Button: {
+    backgroundColor: 'transparent',
+  },
+  ButtonLabel: {
+    color: 'blue',
+  },
+});
 export default ViewMeals;

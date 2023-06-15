@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from 'react';
-import {SafeAreaView, Button, View,Text,StyleSheet, TextInput,ScrollView, Image } from 'react-native';
+import {SafeAreaView, View,Text,StyleSheet, TextInput,ScrollView, Image } from 'react-native';
 import LinkApi from '../LinkApi'
 import {Picker} from '@react-native-picker/picker';
 import { Modal } from 'react-native';
 import UserContexte from '../UserContext';
 import { useRoute } from '@react-navigation/native';
-
+import { Button } from 'react-native-paper';
 
 
 
@@ -118,7 +118,9 @@ return (
   
   <SafeAreaView style={styles.container}>
     <TextInput style={styles.input} onChangeText={onChangeText} onFocus={handleFocus} onBlur={handleBlur} value={text}/>
-    <Button title="Search" onPress={handleSearch} />
+    <Button  mode="contained" onPress={handleSearch} >
+       Search
+  </Button>
     <ScrollView style={styles.scrollView}>
         {searchResults.map((result, index) => (
           <View key={index} style={styles.resultItem}>
@@ -134,7 +136,9 @@ return (
               </View>
             ))}
           </View>
-          <Button title="Add to Menu"  onPress={() => (handleFirstAddToMenu(result))} />
+          <Button  mode="contained" onPress={() => (handleFirstAddToMenu(result))} >
+          Add to Menu
+  </Button>
           <Modal visible={modalVisible} onRequestClose={() => setModalVisible(false)}>
           <View style={styles.modalContent}>
           <Picker selectedValue={selectedDay} onValueChange={(itemValue) => setSelectedDay(itemValue)}>
@@ -153,8 +157,9 @@ return (
             <Picker.Item label="Snack" value="Snack" />
             <Picker.Item label="Dinner" value="Dinner" />
           </Picker>
-          <Button title="Add to Menu" disabled={!isFormValid} onPress={() => handleAddToMenu(selectedDay, selectedValue, selectedFood)} />
-
+          <Button  mode="contained"  disabled={!isFormValid} onPress={() => handleAddToMenu(selectedDay, selectedValue, selectedFood)}  >
+          Add to Menu
+  </Button>
       </View>
       </Modal>
 
