@@ -27,7 +27,7 @@ const DayMeals = ({dayMenu, onRemoveFood, onAddFood }) => {
           <ViewMeals meals={dayMenu.Snack}  onAddFood={onAddFood} onRemoveFood={onRemoveFood} title="Snack" calo={caloPerMeal(dayMenu.Snack)} />
           
           <Text style={styles.totalCalories}>
-            Total Calories (kcal) : {} {calculateTotalCalories({'Breakfast' :[...dayMenu.Breakfast], 'Lunch' : [...dayMenu.Lunch], 'Dinner' : [...dayMenu.Dinner], 'Snack' : [...dayMenu.Snack]})}
+            Total Calories (kcal) :{calculateTotalCalories({'Breakfast' :[...dayMenu.Breakfast], 'Lunch' : [...dayMenu.Lunch], 'Dinner' : [...dayMenu.Dinner], 'Snack' : [...dayMenu.Snack]})}
           </Text>
         
   

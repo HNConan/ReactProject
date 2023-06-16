@@ -16,7 +16,8 @@ const Tab = createBottomTabNavigator();
 
 
 export default function App() {
-  
+  <PaperProvider>
+
   return (
     <PaperProvider theme={DefaultTheme}>
 
@@ -38,7 +39,7 @@ export default function App() {
          tabBarIcon: ({  size }) => (
             <MaterialCommunityIcons name="food-fork-drink"  size={size} />
           ),
-          title: 'Plannig repas',
+          title: 'Planning repas',
 
         }} />
       <Tab.Screen name="FoodDatabase" component={FoodDatabase} options={{
