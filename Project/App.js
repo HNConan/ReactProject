@@ -16,8 +16,7 @@ const Tab = createBottomTabNavigator();
 
 
 export default function App() {
-  <PaperProvider>
-
+  
   return (
     <PaperProvider theme={DefaultTheme}>
 
