@@ -1,10 +1,12 @@
-import React, {useState, useEffect } from 'react';
+import React, {useContext, useState, useEffect } from 'react';
 import {Picker} from '@react-native-picker/picker';
 import Modal from 'react-native-modal';
 import {StyleSheet, View ,InpuSafeAreaView, StatusBar, ViewtField, Keyboard, SafeAreaView,Text} from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import DropDownPicker from 'react-native-dropdown-picker';
+import UserContexte from '../UserContext';
+
 
 import {
   Button,
@@ -24,8 +26,7 @@ const HealthGoals = () => {
   const [isFormValid, setIsFormValid] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [result, setResult] = useState(0);
-
-
+  const {bmr, setBMR} = useContext(UserContexte);
   const [genderOpen, setGenderOpen] = useState(false);
   const [ActivityLevelOpen, setActivityLevelOpen] = useState(false);
   const [HealthGoalOpen, setHealthGoalOpen] = useState(false);
@@ -100,8 +101,9 @@ const HealthGoals = () => {
   }, [age, gender, height, weight, activityLevel, healthGoal]);
 
   const handleSubmit = () => {
-    const bmr = calculateBMR();
-    setResult(bmr);
+    const bmrTemp = calculateBMR();
+    setBMR(bmrTemp);
+    setResult(bmrTemp);
     setIsModalVisible(true);
   };
 

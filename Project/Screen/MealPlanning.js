@@ -50,7 +50,7 @@ const MealPlanning = ({ navigation }) => {
       <DayMeals
         day={currentDay}
         dayMenu={dayMenu[currentDay]}
-        onAddFood={handleAddFood}
+        onAddFood={(meal) => handleAddFood(currentDay, meal)}
         onRemoveFood={handleRemoveFood}
       />
     </View>

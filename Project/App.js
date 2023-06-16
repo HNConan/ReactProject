@@ -28,7 +28,7 @@ export default function App() {
          tabBarIcon: ({ size }) => (
             <MaterialCommunityIcons name="home"  size={size} />
           ),
-            title: 'Personnal Information',
+            title: 'Calcul BMR',
            
            
           

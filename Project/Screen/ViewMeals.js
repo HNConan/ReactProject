@@ -19,8 +19,6 @@ const ViewMeals = ({ meals, title, onRemoveFood, onAddFood,calo }) => {
               <IconButton
                 onPress={() => onRemoveFood(title, index)}
                 icon="close"
-                
-                
               />
             </View>
           </View>
@@ -28,7 +26,6 @@ const ViewMeals = ({ meals, title, onRemoveFood, onAddFood,calo }) => {
         <View style={styles.ButtonContainer}>
           <Button
             mode="text"
-            
             onPress={() => onAddFood(title)}
             labelStyle={styles.ButtonLabel}
           >

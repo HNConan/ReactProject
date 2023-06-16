@@ -42,12 +42,14 @@ export const UserContexteProvider = ({ children }) => {
                     },
       });
 
+      const [bmr, setBMR] = useState(0);
+
       const saveDayMenuToStorage = async (updatedDayMenu) => {
         try {
           const jsonDayMenu = JSON.stringify(updatedDayMenu);
           await AsyncStorage.setItem('dayMenu', jsonDayMenu);
         } catch (error) {
-          console.log('Erreur lors de la sauvegarde:', error);
+          ('Erreur lors de la sauvegarde:', error);
         }
       };
     
@@ -74,7 +76,7 @@ export const UserContexteProvider = ({ children }) => {
       };
       
   return (
-    <UserContexte.Provider value={{dayMenu, setDayMenu: updateDayMenu }}>
+    <UserContexte.Provider value={{dayMenu, setDayMenu: updateDayMenu, bmr, setBMR } }>
       {children}
     </UserContexte.Provider>
   );

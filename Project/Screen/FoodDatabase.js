@@ -53,6 +53,8 @@ const handleBlur = () => {
 
 const handleFirstAddToMenu = (result) => {
   setSelectedFood(result);
+  
+  
   if(route.params && route.params['day'] && route.params['meal']){
     setSelectedDay(route.params.day);
     setSelectedValue(route.params.meal);
