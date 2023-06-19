@@ -7,7 +7,7 @@ const ViewMeals = ({ meals, title, onRemoveFood, onAddFood,calo }) => {
     <View>
         <View style={styles.mealTitleContainer}>
       <Text style={styles.mealTitle}>{title}:</Text>
-      <Text style={styles.caloPerMeal} >{calo}</Text>
+      <Text style={styles.caloPerMeal} >{calo} (kcal)</Text>
       </View>
 
 

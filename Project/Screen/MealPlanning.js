@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { View, Text, Button, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import UserContexte from '../UserContext';
 import DayMeals from './DayMeals';
 
@@ -47,13 +47,14 @@ const MealPlanning = ({ navigation }) => {
           <Text style={styles.navigationArrow}>{'>'}</Text>
         </TouchableOpacity>
       </View>
-      <DayMeals
-        day={currentDay}
-        dayMenu={dayMenu[currentDay]}
-        onAddFood={(meal) => handleAddFood(currentDay, meal)}
-        onRemoveFood={handleRemoveFood}
-      />
+        <DayMeals
+          day={currentDay}
+          dayMenu={dayMenu[currentDay]}
+          onAddFood={(meal) => handleAddFood(currentDay, meal)}
+          onRemoveFood={handleRemoveFood}
+        />
     </View>
+
   );
 };
 
@@ -64,13 +65,14 @@ const styles = {
     justifyContent: 'center',
     marginTop: 10,
   },
+  
   navigationArrow: {
-    fontSize: 18,
+    fontSize: 25,
     fontWeight: 'bold',
     paddingHorizontal: 10,
   },
   currentDayText: {
-    fontSize: 18,
+    fontSize: 25,
     fontWeight: 'bold',
     marginHorizontal: 10,
   },

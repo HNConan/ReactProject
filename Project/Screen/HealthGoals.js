@@ -37,23 +37,23 @@ const HealthGoals = () => {
 
   const [gender, setGender] = useState([
 
-    {label: 'Homme', value: 'Male'},
-    {label: 'Femme', value: 'Female'}
+    {label: 'Male', value: 'Male'},
+    {label: 'Female', value: 'Female'}
   ]);
   const  [activityLevel, setActivityLevel] = useState([
 
-    {label: 'Sédentaire', value: 'sedentary'},
-    {label: 'Exercices légés', value: 'light_exercise'},
-    {label: 'Exercices modérés', value: 'moderate_exercise'},
-    {label: 'Exercices difficiles', value: 'heavy_exercise'},
-    {label: 'Sportif de haut niveau', value: 'extra_active'}
+    {label: 'Sedentary', value: 'sedentary'},
+    {label: 'Light exercise', value: 'light_exercise'},
+    {label: 'Moderate exercise', value: 'moderate_exercise'},
+    {label: 'Heavy exercise', value: 'heavy_exercise'},
+    {label: 'Extra active', value: 'extra_active'}
 
   ]);
   const [healthGoal, setHealthGoal] = useState([
 
-    {label: 'Perte de poids', value: 'weight_loss'},
-    {label: 'Maintien de poids', value: 'weight_maintenance'},
-    {label: 'Gain de Poids', value: 'weight_gain'},
+    {label: 'Weight loss', value: 'weight_loss'},
+    {label: 'Weight maintenance', value: 'weight_maintenance'},
+    {label: 'Weight gain', value: 'weight_gain'},
   ])
     
   const handleGenderChange = (itemValue) => {
@@ -124,14 +124,14 @@ const HealthGoals = () => {
     />   
 
 <TextInput
-      label="Taille"
+      label="Height (cm)"
       value={height}
       onChangeText={text => setHeight(text)}
     />   
 
 
 <TextInput
-      label="Poids"
+      label="Weight (kg)"
       value={weight}
       onChangeText={text => setWeight(text)}
     />   
@@ -145,7 +145,7 @@ const HealthGoals = () => {
   setOpen={setGenderOpen}
   setValue={setGenderValue}
   setItems={setGender}
-  placeholder="Sexe"
+  placeholder="Gender"
   placeholderStyle={styles.placeholderStyles}
   containerStyle={[styles.dropdownContainer, { zIndex: 100 }]}
 
@@ -164,7 +164,7 @@ const HealthGoals = () => {
       setValue={setActivityLevelValue}
       setItems={setActivityLevel}
       containerStyle={[styles.dropdownContainer, { zIndex: 90 }]}
-      placeholder="Niveau d'activitée"
+      placeholder="Activity level"
 
 
     />
@@ -181,18 +181,18 @@ const HealthGoals = () => {
     setValue={setHealthGoalValue}
     setItems={setHealthGoal}
     containerStyle={[styles.dropdownContainer, { zIndex: 80 }]}
-    placeholder="Objectif"
+    placeholder="Objective"
     />
     <View style={styles.spacerStyle} />
     <Button  mode="contained" onPress={handleSubmit} disabled={!isFormValid} >
-    Commencer
+    Start
   </Button>
       <Modal isVisible={isModalVisible}>
         <View style={styles.modalContainer}>
-          <Text style={styles.modalText}>Votre BMR est :</Text>
+          <Text style={styles.modalText}>Your BMR (Basic Metabolic Rate) is :</Text>
           <Text style={styles.modalText}>{result}</Text>
           <Button  mode="contained" onPress={() => setIsModalVisible(false)} disabled={!isFormValid} >
-          Fermer
+          Close
   </Button>
         </View>
       </Modal>

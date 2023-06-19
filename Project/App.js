@@ -28,7 +28,7 @@ export default function App() {
          tabBarIcon: ({ size }) => (
             <MaterialCommunityIcons name="home"  size={size} />
           ),
-            title: 'Calcul BMR',
+            title: 'Calcul your BMR',
            
            
           
@@ -38,14 +38,14 @@ export default function App() {
          tabBarIcon: ({  size }) => (
             <MaterialCommunityIcons name="food-fork-drink"  size={size} />
           ),
-          title: 'Planning repas',
+          title: 'Meal planning',
 
         }} />
       <Tab.Screen name="FoodDatabase" component={FoodDatabase} options={{
          tabBarIcon: ({ size }) => (
             <MaterialCommunityIcons name="food-apple" size={size} />
           ),
-          title: 'Rechercher un aliment',
+          title: 'Find an ingredient',
 
         }} />
     </Tab.Navigator>
